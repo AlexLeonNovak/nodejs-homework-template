@@ -13,4 +13,8 @@ module.exports = class ErrorException extends Error {
 	static NotFound() {
 		return new this(404, 'Not found');
 	}
+
+	static UnauthorizedError() {
+		return new this(401, 'User not authorized');
+	}
 }
