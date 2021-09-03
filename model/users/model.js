@@ -36,7 +36,7 @@ usersSchema.methods.setPassword = function (password) {
 }
 
 usersSchema.methods.isValidPassword = function (password) {
-	return bcrypt.compareSync(String(password), this.password)
+	return bcrypt.compareSync(String(password), this.passwordHash)
 }
 
 const User = model('users', usersSchema);

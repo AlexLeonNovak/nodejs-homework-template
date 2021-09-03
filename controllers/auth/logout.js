@@ -1,7 +1,10 @@
+const UserModel = require('../../model/users');
 
 const logout = async (req, res, next) => {
 	try {
-		return res.json({});
+		const {id} = req.user;
+		await UserModel.logout(id);
+		return res.NoContent();
 	} catch (e) {
 		next(e);
 	}
