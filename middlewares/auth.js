@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
 		if (type !== 'Bearer' || !token) {
 			throw new Error();
 		}
-		const user = User.getByToken(token);
+		const user = await User.getByToken(token);
 		const userData = jwt.verify(token, JWT_ACCESS_SECRET);
 		if (!user || !userData) {
 			throw new Error();

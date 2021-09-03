@@ -1,10 +1,15 @@
-const {Schema, model} = require('mongoose');
+const {Schema, Types, model} = require('mongoose');
 
 const contactsSchema = new Schema(
 	{
 		name: String,
 		email: String,
-		phone: String
+		phone: String,
+		owner: {
+			type: Types.ObjectId,
+			ref: 'users',
+			required: true
+		}
 	},
 	{
 		versionKey: false,

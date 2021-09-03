@@ -5,7 +5,8 @@ const ErrorException = require('../../exceptions/error.exception');
 const getById = async (req, res, next) => {
 	try {
 		const {contactId} = req.params;
-		const contact = await Contacts.getContactById(contactId);
+		const {id: userId} = req.user;
+		const contact = await Contacts.getContactById(userId, contactId);
 		if (contact) {
 			return res.OK({contact});
 		}

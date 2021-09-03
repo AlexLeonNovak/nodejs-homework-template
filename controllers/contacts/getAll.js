@@ -2,7 +2,8 @@ const Contacts = require('../../model/contacts');
 
 const getAll = async (req, res, next) => {
 	try {
-		const contacts = await Contacts.getAllContacts();
+		const {id: userId} = req.user;
+		const contacts = await Contacts.getAllContacts(userId);
 		return res.OK({contacts});
 	} catch (e) {
 		next(e);
