@@ -4,11 +4,7 @@ const registration = async (req, res, next) => {
 	try {
 		const {email, password} = req.body;
 		const user = await UserModel.registration(email, password);
-		return res.status(201).json({
-			status: 'success',
-			code: 201,
-			data: {user}
-		});
+		return res.Created({user});
 	} catch (e) {
 		next(e);
 	}

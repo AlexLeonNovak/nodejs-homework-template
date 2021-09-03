@@ -6,7 +6,7 @@ const remove = async (req, res, next) => {
 		const {contactId} = req.params;
 		const contact = await Contacts.removeContact(contactId);
 		if (contact) {
-			return res.json(contact);
+			return res.OK({contact});
 		}
 		return next(ErrorException.NotFound());
 	} catch (e) {

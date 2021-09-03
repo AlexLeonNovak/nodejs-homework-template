@@ -1,3 +1,4 @@
+const UserModel = require('../../model/users')
 
 const login = async (req, res, next) => {
 	try {

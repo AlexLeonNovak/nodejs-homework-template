@@ -7,7 +7,7 @@ const getById = async (req, res, next) => {
 		const {contactId} = req.params;
 		const contact = await Contacts.getContactById(contactId);
 		if (contact) {
-			return res.json(contact);
+			return res.OK({contact});
 		}
 		return next(ErrorException.NotFound());
 	} catch (e) {

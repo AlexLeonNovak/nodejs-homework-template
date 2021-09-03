@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const {emailRegex} = require('../config/constants');
+const {emailRegex} = require('../helpers/constants');
 
 const registrationAndLogin = Joi.object({
 	password: Joi.string().min(6).required(),

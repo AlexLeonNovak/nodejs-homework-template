@@ -14,6 +14,9 @@ app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
 
+const {responseMethods} = require('./middlewares');
+app.use(responseMethods);
+
 app.use('/', routes);
 
 app.use((_,__, next) => next(ErrorException.NotFound))

@@ -6,7 +6,7 @@ const update = async (req, res, next) => {
 		const {contactId} = req.params;
 		const contact = await Contacts.updateContact(contactId, req.body);
 		if (contact) {
-			return res.json(contact);
+			return res.OK({contact});
 		}
 		return next(ErrorException.NotFound());
 	} catch (e) {
