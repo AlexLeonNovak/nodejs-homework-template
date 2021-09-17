@@ -1,8 +1,15 @@
 const {Schema, model} = require('mongoose');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
+const { customAlphabet } = require('nanoid');
+const { alphanumeric } = require('nanoid-dictionary');
 
+const randomString = customAlphabet(alphanumeric, 32);
 const {emailRegex} = require('../../helpers/constants');
+
+const STATUS_ACTIVE = 'active';
+const STATUS_WAIT = 'wait';
+const STATUS_BLOCKED = 'blocked';
 
 const usersSchema = new Schema(
 	{
@@ -29,6 +36,14 @@ const usersSchema = new Schema(
 			default: function () {
 				return gravatar.url(this.email, { s: '250' }, true)
 			}
+		},
+		emailConfirmToken: {
+			type: String,
+			default: `${randomString()}_${Date.now()}`
+		},
+		status: {
+			type: String,
+			default: STATUS_WAIT
 		}
 	},
 	{
@@ -44,6 +59,15 @@ usersSchema.methods.setPassword = function (password) {
 
 usersSchema.methods.isValidPassword = function (password) {
 	return bcrypt.compareSync(String(password), this.passwordHash)
+}
+
+usersSchema.methods.isActive = function () {
+	return this.status === STATUS_ACTIVE;
+}
+
+usersSchema.methods.activate = function () {
+	this.emailConfirmToken = null;
+	this.status = STATUS_ACTIVE;
 }
 
 const User = model('users', usersSchema);

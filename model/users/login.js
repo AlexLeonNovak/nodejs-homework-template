@@ -8,7 +8,7 @@ const {JWT_ACCESS_SECRET} = process.env;
 
 const login = async (email, password) => {
 	const user = await User.findOne({email});
-	if (!user || !user.isValidPassword(password)) {
+	if (!user || !user.isValidPassword(password) || !user.isActive()) {
 		throw ErrorException.BadRequest('Wrong email or password');
 	}
 	const userData = userDto(user);
