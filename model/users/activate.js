@@ -4,7 +4,7 @@ const ErrorException = require('../../exceptions/error.exception');
 
 const activate = async (token) => {
 	const [, time] = token.split('_');
-	if (Number(time) + process.env.EMAIL_CONFIRM_TOKEN_EXPIRE >= Date.now()) {
+	if (Number(time) + Number(process.env.EMAIL_CONFIRM_TOKEN_EXPIRE) >= Date.now()) {
 		throw ErrorException.BadRequest('Activation token is expired');
 	}
 	const user = await User.findOne({emailConfirmToken: token});

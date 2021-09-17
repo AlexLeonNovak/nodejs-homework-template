@@ -4,6 +4,7 @@ const logout = require('./logout');
 const getByToken = require('./getByToken');
 const updateAvatar = require('./updateAvatar');
 const activate = require('./activate');
+const resendEmailToken = require('./resendEmailToken');
 
 module.exports = {
 	registration,
@@ -11,5 +12,6 @@ module.exports = {
 	logout,
 	getByToken,
 	updateAvatar,
-	activate
+	activate,
+	resendEmailToken,
 }

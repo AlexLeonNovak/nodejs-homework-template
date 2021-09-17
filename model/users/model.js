@@ -65,9 +65,21 @@ usersSchema.methods.isActive = function () {
 	return this.status === STATUS_ACTIVE;
 }
 
+usersSchema.methods.isWait = function () {
+	return this.status === STATUS_WAIT;
+}
+
+usersSchema.methods.isBlocked = function () {
+	return this.status === STATUS_BLOCKED;
+}
+
 usersSchema.methods.activate = function () {
 	this.emailConfirmToken = null;
 	this.status = STATUS_ACTIVE;
+}
+
+usersSchema.methods.generateEmailConfirmToken = function () {
+	this.emailConfirmToken = `${randomString()}_${Date.now()}`;
 }
 
 const User = model('users', usersSchema);
